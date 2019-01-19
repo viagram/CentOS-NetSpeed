@@ -136,16 +136,12 @@ function check_kernel(){
         printnew -green -a "尝试安装内核: "
         printnew -yellow "3.10.0-327.el7.x86_64."
         pause
-        if ! wget -N --no-check-certificate -c ${down_url}/kernel-3.10.0-327.el7.x86_64.rpm; then
-            printnew -red "下载 kernel 失败."
+        if ! wget -N --no-check-certificate -c ${down_url}/kernel-3.10.0-327.el7.x86_64.zip; then
+            printnew -red "下载 kernel-3.10.0-327.el7.x86_64.zip 失败."
             exit 1
         fi
-        if ! wget -N --no-check-certificate -c ${down_url}/kernel-headers-3.10.0-327.el7.x86_64.rpm; then
-            printnew -red "下载 kernel-header 失败."
-            exit 1
-        fi
-        if ! wget -N --no-check-certificate -c ${down_url}/kernel-devel-3.10.0-327.el7.x86_64.rpm ; then
-            printnew -red "下载 kernel-devel 失败."
+		if ! unzip -o kernel-3.10.0-327.el7.x86_64.zip; then
+            printnew -red "解压 kernel-3.10.0-327.el7.x86_64.zip 失败."
             exit 1
         fi
         yum remove -y kernel-firmware kernel-headers
