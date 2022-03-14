@@ -48,7 +48,7 @@ function printnew(){
     fi
 }
 
-function CheckCommand(){
+function Checkcommand(){
     local name=""
     for name in $(echo "$1" | sed 's/,/\n/g' | sed '/^$/d' | sed 's/^[ \t]*//g' | sed 's/[ \t]*$//g'); do
         if ! command -v ${name} >/dev/null 2>&1; then
@@ -199,7 +199,7 @@ function Make_Lic(){
     MAC=$(ifconfig "$Eth" |awk '/HWaddr/{ print $5}')
     [ -z "$MAC" ] && MAC=$(ifconfig "$Eth" |awk '/ether/{ print $2}')
     [ -z "$MAC" ] && Uninstall && echo "没有找到有效的 MAC 地址! " && exit 1
-    if ! curl -skL --connect-timeout 8 -m 12 "https://dnsdian.com/api/apxkey.php?mac=${MAC}" -o "/appex/etc/apx.lic"; then
+    if ! curl -skL --connect-timeout 8 -m 12 "https://zuzb.com/api/apxkey.php?mac=${MAC}" -o "/appex/etc/apx.lic"; then
         printnew -red "获取授权文件失败."
         exit 1
     fi
@@ -320,7 +320,7 @@ else
     case "$num" in
         1)
             printnew -green '检测依懒程序...'
-            CheckCommand which,wget,unzip,ethtool,ipcs,chkconfig
+            Checkcommand which,wget,unzip,ethtool,ipcs,chkconfig
             check_sharemem
             check_speeder
             check_kernel
