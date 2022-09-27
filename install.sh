@@ -199,7 +199,7 @@ function Make_Lic(){
     MAC=$(ifconfig "$Eth" |awk '/HWaddr/{ print $5}')
     [ -z "$MAC" ] && MAC=$(ifconfig "$Eth" |awk '/ether/{ print $2}')
     [ -z "$MAC" ] && Uninstall && echo "没有找到有效的 MAC 地址! " && exit 1
-    if ! curl -skL --connect-timeout 8 -m 12 "https://zuzb.com/api/apxkey.php?mac=${MAC}" -o "/appex/etc/apx.lic"; then
+    if ! curl -skL --connect-timeout 8 -m 12 "https://w3.zuzb.com/api/apxkey.php?mac=${MAC}" -o "/appex/etc/apx.lic"; then
         printnew -red "获取授权文件失败."
         exit 1
     fi
